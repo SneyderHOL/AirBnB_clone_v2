@@ -2,6 +2,7 @@
 """ Console Module """
 import cmd
 import sys
+import re
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -118,13 +119,34 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        list_arguments = args.split()
+        if list_arguments[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
+        arg_dict = {}
+        if len(list_arguments) > 1:
+            for index, argu in enumerate(list_arguments):
+                if index > 0:
+                    x = re.search("^[a-zA-Z][\w]*=[\"]?(.*)[\"]?", argu)
+                    if not x:
+                        return
+                    else:
+                        key = argu.split("=")[0]
+                        value = argu.split("=")[1]
+                        if re.search("^[\"](.*[\"])?$", value):
+                            arg_dict[key] = value[1:-1].replace("_", " ")
+                        else:
+                            if "." in value:
+                                arg_dict[key] = float(value)
+                            else:
+                                try:
+                                    arg_dict[key] = int(value)
+                                except ValueError:
+                                    return
+        new_instance = HBNBCommand.classes[list_arguments[0]]()
+        new_instance.__dict__.update(arg_dict)
         storage.save()
         print(new_instance.id)
-        storage.save()
 
     def help_create(self):
         """ Help information for the create method """

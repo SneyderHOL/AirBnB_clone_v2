@@ -21,9 +21,15 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, default=0, nullable=False)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
+    amenities = ""
+    reviews = ""
+
     if os.environ.get('HBNB_TYPE_STORAGE') != 'db':
+        """
         amenity_ids = self.amenities
         reviews = self.reviews
+        """
+        pass
 
     @property
     def amenities(self):

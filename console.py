@@ -239,7 +239,6 @@ class HBNBCommand(cmd.Cmd):
                 for value in bd_storage.values():
                     print_list.append(str(value))
             print(print_list)
-            
             return
 
         if args:

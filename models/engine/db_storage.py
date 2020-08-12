@@ -18,7 +18,8 @@ class DBStorage:
     """DBstorage class"""
     __engine = None
     session = None
-    classes = [User, Place, State, City, Amenity, Review]
+#    classes = [User, Place, State, City, Amenity, Review]
+    classes = [State, City]
 
     def __init__(self):
         """Constructor method"""
@@ -45,7 +46,7 @@ class DBStorage:
         else:
             for class_name in self.classes:
                 objects_list = self.session.query(class_name).all()
-                for element in object_list:
+                for element in objects_list:
                     all_objects.append(element)
         new_dictionary = {}
         for element in all_objects:

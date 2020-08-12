@@ -233,8 +233,6 @@ class HBNBCommand(cmd.Cmd):
                     return
                 bd_storage = storage.all(HBNBCommand.classes[args])
                 for value in bd_storage.values():
-                    if len(value.cities) != 0:
-                        print(str(value.cities[0]))
                     print_list.append(str(value))
             else:
                 bd_storage = storage.all()

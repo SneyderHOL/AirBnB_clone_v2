@@ -5,7 +5,7 @@ from sqlalchemy import Integer, String, Column, DateTime, ForeignKey
 from sqlalchemy.orm import relationship, backref
 
 
-class Review(BaseModel):
+class Review(BaseModel, Base):
     """ Review classto store review information """
     place_id = ""
     user_id = ""
@@ -16,5 +16,3 @@ class Review(BaseModel):
     user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
     user = relationship("User", backref="reviews")
     place = relationship("Place", backref="reviews")
-
-    

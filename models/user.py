@@ -4,7 +4,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Integer, String, Column, DateTime, ForeignKey
 
 
-class User(BaseModel):
+class User(BaseModel, Base):
     """This class defines a user by various attributes"""
     email = ''
     password = ''

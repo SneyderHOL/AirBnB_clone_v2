@@ -17,7 +17,7 @@ from models.review import Review
 class DBStorage:
     """DBstorage class"""
     __engine = None
-    session = None
+    __session = None
 #    classes = [User, Place, State, City, Amenity, Review]
     classes = [State, City]
 
@@ -42,10 +42,10 @@ class DBStorage:
         """query all objects in a class name"""
         all_objects = []
         if cls:
-            all_objects = self.session.query(cls).all()
+            all_objects = self.__session.query(cls).all()
         else:
             for class_name in self.classes:
-                objects_list = self.session.query(class_name).all()
+                objects_list = self.__session.query(class_name).all()
                 for element in objects_list:
                     all_objects.append(element)
         new_dictionary = {}
@@ -57,23 +57,23 @@ class DBStorage:
     def new(self, obj):
         """add the object to the current database session"""
         if obj:
-            self.session.add(obj)
-            print(self.session.new)
-            self.session.commit()
+            self.__session.add(obj)
+#            print(self.__session.new)
+            self.__session.commit()
 
     def save(self):
         """commit all changes of the current database session"""
-        self.session.add()
-        self.session.commit()
+        self.__session.add()
+        self.__session.commit()
 
     def delete(self, obj=None):
         """delete from the current database session obj if not None"""
         if obj:
-            self.session.delete(obj)
+            self.__session.delete(obj)
 
     def reload(self):
         """create all tables in the database"""
         Base.metadata.create_all(self.__engine)
         session = scoped_session(sessionmaker(bind=self.__engine,
                                               expire_on_commit=False))
-        self.session = session()
+        self.__session = session()

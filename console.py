@@ -233,12 +233,15 @@ class HBNBCommand(cmd.Cmd):
                     return
                 bd_storage = storage.all(HBNBCommand.classes[args])
                 for value in bd_storage.values():
+                    if len(value.cities) != 0:
+                        print(str(value.cities[0]))
                     print_list.append(str(value))
             else:
                 bd_storage = storage.all()
                 for value in bd_storage.values():
                     print_list.append(str(value))
             print(print_list)
+            
             return
 
         if args:
@@ -246,11 +249,11 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage.all().items():
+            for k, v in storage._FileStorage__objects.items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage.all().items():
+            for k, v in storage._FileStorage__objects.items():
                 print_list.append(str(v))
 
         print(print_list)

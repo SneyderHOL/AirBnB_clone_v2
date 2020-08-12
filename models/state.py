@@ -10,6 +10,3 @@ class State(BaseModel, Base):
     name = ""
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
-    cities = relationship("City", backref("cities",
-                                          cascade="all,deleta-orphan",
-                                          single_parent=True))

@@ -234,8 +234,13 @@ class HBNBCommand(cmd.Cmd):
                 bd_storage = storage.all(HBNBCommand.classes[args])
                 for value in bd_storage.values():
                     print_list.append(str(value))
-                print(print_list)
-                return            
+            else:
+                bd_storage = storage.all()
+                for value in bd_storage.values():
+                    print_list.append(str(value))
+            print(print_list)
+            return
+
         if args:
             args = args.split(' ')[0]  # remove possible trailing args
             if args not in HBNBCommand.classes:

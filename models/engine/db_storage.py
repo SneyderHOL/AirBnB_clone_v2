@@ -18,6 +18,7 @@ class DBStorage:
     """DBstorage class"""
     __engine = None
     session = None
+    classes = [User, Place, State, City, Amenity, Review]
 
     def __init__(self):
         """Constructor method"""
@@ -38,10 +39,14 @@ class DBStorage:
 
     def all(self, cls=None):
         """query all objects in a class name"""
+        all_objects = []
         if cls:
             all_objects = self.session.query(cls).all()
         else:
-            all_objects = self.session.query(State).all()
+            for class_name in self.classes:
+                objects_list = self.session.query(class_name).all()
+                for element in object_list:
+                    all_objects.append(element)
         new_dictionary = {}
         for element in all_objects:
             new_dictionary[element.__class__.

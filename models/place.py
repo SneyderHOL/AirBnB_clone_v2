@@ -5,6 +5,16 @@ from sqlalchemy import Integer, Float, String, Column, DateTime, ForeignKey
 from sqlalchemy.orm import relationship, backref
 from models.review import Review
 from models.amenity import Amenity
+from sqlalchemy.schema import Table
+
+
+place_amenity = Table('place_amenity', Base.metadata,
+                      Column('place_id', String(60),
+                             ForeignKey('places.id'),
+                             nullable=False),
+                      Column('amenity_id', String(60),
+                             ForeignKey('amenities.id'),
+                             nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -39,7 +49,6 @@ class Place(BaseModel, Base):
         """setter method for amenities"""
         if type(value) != Amenity:
             return
-#            raise TypeError('amenities value must be of type Amenity')
         self.amenity_ids.append(value)
 
     @property

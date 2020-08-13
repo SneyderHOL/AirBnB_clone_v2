@@ -62,7 +62,7 @@ class DBStorage:
 
     def save(self):
         """commit all changes of the current database session"""
-        self.__session.add()
+#        self.__session.add()
         self.__session.commit()
 
     def delete(self, obj=None):

@@ -39,6 +39,7 @@ class TestHBNBCommand(unittest.TestCase):
             cur = self.db.cursor()
             query = "SELECT * FROM states;"
             res1 = cur.execute(query)
+            output = None
             with patch('sys.stdout', new=StringIO()) as f:
                 HBNBCommand().onecmd("create State name=\"California\"")
                 output = f.getvalue().strip()
@@ -83,7 +84,7 @@ class TestHBNBCommand(unittest.TestCase):
                 HBNBCommand().onecmd("create Review text=\"Amazing\"")
                 output = f.getvalue().strip()
                 self.assertTrue(re.match('().+-().+-().+-().+-().+', output))
-            
+
     def test_pep8(self):
         """ Test for PEP8 """
         pep8_val = pep8.StyleGuide(quiet=True)

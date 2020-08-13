@@ -5,4 +5,10 @@ from models.base_model import BaseModel
 from models import storage
 import os
 
-pass
+
+@unittest.skipIf(os.getenv("HBNB_TYPE_STORAGE") != "db", "Doesn't apply for File Storage")
+class TestDataBaseStorage(unittest.TestCase):
+    """Test the console"""
+    def test_db(self):
+        """ tests databases """
+        pass

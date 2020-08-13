@@ -83,6 +83,12 @@ class TestHBNBCommand(unittest.TestCase):
                 HBNBCommand().onecmd("create Review text=\"Amazing\"")
                 output = f.getvalue().strip()
                 self.assertTrue(re.match('().+-().+-().+-().+-().+', output))
-
+            
+    def test_pep8(self):
+        """ Test for PEP8 """
+        pep8_val = pep8.StyleGuide(quiet=True)
+        console_path = 'console.py'
+        result_console = pep8_val.check_files([console_path])
+        self.assertEqual(result_console.total_errors, 0)
 if __name__ == '__main__':
     unittest.main()

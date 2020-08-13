@@ -4,18 +4,12 @@ from models.base_model import BaseModel, Base
 from models.city import City
 from sqlalchemy import Integer, String, Column, DateTime, ForeignKey
 from sqlalchemy.orm import relationship, backref
-import os
 
 
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
-    if os.environ.get('HBNB_TYPE_STORAGE') != 'db':
-        """
-        cities = self.cities
-        """
-        pass
 
     @property
     def cities(self):

@@ -3,7 +3,6 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Integer, Float, String, Column, DateTime, ForeignKey
 from sqlalchemy.orm import relationship, backref
-import os
 from models.review import Review
 from models.amenity import Amenity
 
@@ -21,15 +20,7 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, default=0, nullable=False)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
-    amenities = ""
-    reviews = ""
-
-    if os.environ.get('HBNB_TYPE_STORAGE') != 'db':
-        """
-        amenity_ids = self.amenities
-        reviews = self.reviews
-        """
-        pass
+    amenity_ids = []
 
     @property
     def amenities(self):

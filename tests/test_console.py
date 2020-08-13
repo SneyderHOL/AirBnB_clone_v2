@@ -91,5 +91,35 @@ class TestHBNBCommand(unittest.TestCase):
         console_path = 'console.py'
         result_console = pep8_val.check_files([console_path])
         self.assertEqual(result_console.total_errors, 0)
+
+    def test_all(self):
+        """Testing outputs formats"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("all")
+            output = f.getvalue().strip()
+            print(output)
+            self.assertIsNotNone(re.search('[[\w]*]', output))
+
+    def test_missin_parameters(self):
+        """Missing parameters"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create")
+            output = f.getvalue().strip()
+            self.assertEqual('** class name missing **', output)
+
+    def test_wrong_parameters(self):
+        """wrong parameters"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create state")
+            output = f.getvalue().strip()
+            self.assertEqual('** class doesn\'t exist **', output)
+
+    def test_wrong_parameters_all(self):
+        """wrong parameters to all"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("all state")
+            output = f.getvalue().strip()
+            self.assertEqual('** class doesn\'t exist **', output)
+
 if __name__ == '__main__':
     unittest.main()

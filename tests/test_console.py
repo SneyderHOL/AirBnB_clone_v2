@@ -8,6 +8,7 @@ import re
 from console import HBNBCommand
 from unittest.mock import patch
 import MySQLdb
+import os
 
 
 class TestHBNBCommand(unittest.TestCase):
@@ -32,17 +33,27 @@ class TestHBNBCommand(unittest.TestCase):
         if TestHBNBCommand.db:
             TestHBNBCommand.db.close()
 
-    def test_bd(self):
+    def test_bd_create_State(self):
         """ testing query execution"""
         if TestHBNBCommand.db:
             cur = self.db.cursor()
             query = "SELECT * FROM states;"
             res1 = cur.execute(query)
-            HBNBCommand().onecmd("create State name=\"California\"")
+            with patch('sys.stdout', new=StringIO()) as f:
+                HBNBCommand().onecmd("create State name=\"California\"")
+                output = f.getvalue().strip()
             res2 = cur.execute(query)
-            cur.close()
             self.assertEqual(res2, res1 + 1)
+            query = "SELECT * FROM cities;"
+            city_qty1 = cur.execute(query)
+            HBNBCommand().onecmd("create City name=\"SF\" state_id=\"{}\""
+                                 .format(output))
+            city_qty2 = cur.execute(query)
+            self.assertEqual(citi_qty2, city_qty1 + 1)
+            cur.close()
 
+    @unittest.skipIf(os.environ.get('HBNB_TYPE_STORAGE') == 'db',
+                     "only for File storage")
     def test_do_create(self):
         """ """
 #        if os.environ.get('HBNB_TYPE_STORAGE') == 'db':
@@ -55,6 +66,21 @@ class TestHBNBCommand(unittest.TestCase):
         if TestHBNBCommand.db is None:
             with patch('sys.stdout', new=StringIO()) as f:
                 HBNBCommand().onecmd("create State name=\"California\"")
+                output = f.getvalue().strip()
+                self.assertTrue(re.match('().+-().+-().+-().+-().+', output))
+                HBNBCommand().onecmd("create City name=\"SanFrancisco\"")
+                output = f.getvalue().strip()
+                self.assertTrue(re.match('().+-().+-().+-().+-().+', output))
+                HBNBCommand().onecmd("create User email=\"hbtn@shool.com\"")
+                output = f.getvalue().strip()
+                self.assertTrue(re.match('().+-().+-().+-().+-().+', output))
+                HBNBCommand().onecmd("create Place name=\"Iglu\"")
+                output = f.getvalue().strip()
+                self.assertTrue(re.match('().+-().+-().+-().+-().+', output))
+                HBNBCommand().onecmd("create Amenity name=\"Calefaction\"")
+                output = f.getvalue().strip()
+                self.assertTrue(re.match('().+-().+-().+-().+-().+', output))
+                HBNBCommand().onecmd("create Review text=\"Amazing\"")
                 output = f.getvalue().strip()
                 self.assertTrue(re.match('().+-().+-().+-().+-().+', output))
 

@@ -5,6 +5,16 @@ from sqlalchemy import Integer, Float, String, Column, DateTime, ForeignKey
 from sqlalchemy.orm import relationship, backref
 from models.review import Review
 from models.amenity import Amenity
+from sqlalchemy.schema import Table
+
+
+place_amenity = Table('place_amenity', Base.metadata,
+                      Column('place_id', String(60),
+                             ForeignKey('places.id'),
+                             nullable=False),
+                      Column('amenity_id', String(60),
+                             ForeignKey('amenities.id'),
+                             nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -21,6 +31,8 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     amenity_ids = []
+    amenities = relationship('Amenity', secondary=place_amenity,
+                             backref='place_amenities', viewonly=False)
 
     @property
     def amenities(self):

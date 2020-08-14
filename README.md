@@ -1,4 +1,4 @@
-<center> <h1>HBNB - The Console</h1> </center>
+<center> <h1>HBNB - The Console V2</h1> </center>
 
 This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
 
@@ -8,32 +8,43 @@ This repository contains the initial stage of a student project to build a clone
 
 | Tasks | Files | Description |
 | ----- | ----- | ------ |
-| 0: Authors/README File | [AUTHORS](https://github.com/justinmajetich/AirBnB_clone/blob/dev/AUTHORS) | Project authors |
+| 0: Authors/README File | [AUTHORS](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/AUTHORS) | Project authors |
 | 1: Pep8 | N/A | All code is pep8 compliant|
-| 2: Unit Testing | [/tests](https://github.com/justinmajetich/AirBnB_clone/tree/dev/tests) | All class-defining modules are unittested |
-| 3. Make BaseModel | [/models/base_model.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/base_model.py) | Defines a parent class to be inherited by all model classes|
-| 4. Update BaseModel w/ kwargs | [/models/base_model.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/base_model.py) | Add functionality to recreate an instance of a class from a dictionary representation|
-| 5. Create FileStorage class | [/models/engine/file_storage.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/engine/file_storage.py) [/models/_ _init_ _.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/__init__.py) [/models/base_model.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/base_model.py) | Defines a class to manage persistent file storage system|
-| 6. Console 0.0.1 | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) | Add basic functionality to console program, allowing it to quit, handle empty lines and ^D |
-| 7. Console 0.1 | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) | Update the console with methods allowing the user to create, destroy, show, and update stored data |
-| 8. Create User class | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) [/models/engine/file_storage.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/engine/file_storage.py) [/models/user.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/user.py) | Dynamically implements a user class |
-| 9. More Classes | [/models/user.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/user.py) [/models/place.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/place.py) [/models/city.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/city.py) [/models/amenity.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/amenity.py) [/models/state.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/state.py) [/models/review.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/review.py) | Dynamically implements more classes |
-| 10. Console 1.0 | [console.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/console.py) [/models/engine/file_storage.py](https://github.com/justinmajetich/AirBnB_clone/blob/dev/models/engine/file_storage.py) | Update the console and file storage system to work dynamically with all  classes update file storage |
+| 2: Unit Testing | [/tests](https://github.com/AngieCastano1634/AirBnB_clone_v2/tree/dev/tests) | All class-defining modules are unittested |
+| 3. Make BaseModel | [/models/base_model.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/models/base_model.py) | Defines a parent class to be inherited by all model classes|
+| 4. Update BaseModel w/ kwargs | [/models/base_model.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/models/base_model.py) | Add functionality to recreate an instance of a class from a dictionary representation|
+| 5. Create FileStorage class | [/models/engine/file_storage.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/models/engine/file_storage.py) [/models/_ _init_ _.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/models/__init__.py) [/models/base_model.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/models/base_model.py) | Defines a class to manage persistent file storage system|
+| 6. Console 0.0.1 | [console.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/console.py) | Add basic functionality to console program, allowing it to quit, handle empty lines and ^D |
+| 7. Console 0.1 | [console.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/console.py) | Update the console with methods allowing the user to create, destroy, show, and update stored data |
+| 8. Create User class | [console.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/console.py) [/models/engine/file_storage.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/models/engine/file_storage.py) [/models/user.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/models/user.py) | Dynamically implements a user class |
+| 9. More Classes | [/models/user.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/models/user.py) [/models/place.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/models/place.py) [/models/city.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/models/city.py) [/models/amenity.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/models/amenity.py) [/models/state.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/models/state.py) [/models/review.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/models/review.py) | Dynamically implements more classes |
+| 10. Console 1.0 | [console.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/console.py) [/models/engine/file_storage.py](https://github.com/AngieCastano1634/AirBnB_clone_v2/blob/dev/models/engine/file_storage.py) | Update the console and file storage system to work dynamically with all  classes update file storage |
 <br>
 <br>
 <center> <h2>General Use</h2> </center>
 
 1. First clone this repository.
 
-3. Once the repository is cloned locate the "console.py" file and run it as follows:
+2. Once the repository is cloned locate the "console.py" file and run it as follows:
 ```
-/AirBnB_clone$ ./console.py
+/AirBnB_clone_v2$ ./console.py
 ```
-4. When this command is run the following prompt should appear:
+2.1 Or you can use it with a MYSQL database using environment variable like this:
+```
+    HBNB_ENV: running environment. It can be “dev” or “test” for the moment (“production” soon!)
+    HBNB_MYSQL_USER: the username of your MySQL
+    HBNB_MYSQL_PWD: the password of your MySQL
+    HBNB_MYSQL_HOST: the hostname of your MySQL
+    HBNB_MYSQL_DB: the database name of your MySQL
+    HBNB_TYPE_STORAGE: the type of storage used. It can be “file” (using FileStorage) or db (using DBStorage)
+```
+/AirBnB_clone_v2$ HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py
+```
+3. When this command is run the following prompt should appear:
 ```
 (hbnb)
 ```
-5. This prompt designates you are in the "HBnB" console. There are a variety of commands available within the console program.
+4. This prompt designates you are in the "HBnB" console. There are a variety of commands available within the console program.
 
 ##### Commands
     * create - Creates an instance based on given class
@@ -71,12 +82,16 @@ Advanced syntax is implemented for the following commands:
 <h3>Primary Command Syntax</h3>
 
 ###### Example 0: Create an object
-Usage: create <class_name>
+Usage with a string value: create <class_name> <attribute_name>="<attribute_value>"
+Usage with an int value: create <class_name> <attribute_name>=<attribute_value>
+Usage with a float value: create <class_name> <attribute_name>=<attribute_value>
 ```
-(hbnb) create BaseModel
+(hbnb) create BaseModel name="Test_one"
+(hbnb) create BaseModel number=25
+(hbnb) create BaseModel version=1.2
 ```
 ```
-(hbnb) create BaseModel
+(hbnb) create BaseModel name="new_model"
 3aa5babc-efb6-4041-bfe9-3cc9727588f8
 (hbnb)                   
 ```

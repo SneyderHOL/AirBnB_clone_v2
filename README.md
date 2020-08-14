@@ -28,8 +28,8 @@ This repository contains the initial stage of a student project to build a clone
 
 2. Once the repository is cloned locate the "console.py" file and run it as follows:
 
-2.1 Or you can use it with a MYSQL database using environment variable like this:
-```
+Or you can use it with a MYSQL database using environment variable like this:
+
     HBNB_ENV: running environment. It can be “dev” or “test” for the moment (“production” soon!)
     HBNB_MYSQL_USER: the username of your MySQL
     HBNB_MYSQL_PWD: the password of your MySQL

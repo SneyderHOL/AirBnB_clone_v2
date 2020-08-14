@@ -13,77 +13,96 @@ import os
 
 class TestHBNBCommand(unittest.TestCase):
     """Class for testing with unit test the HBNBCommand class"""
-    db = None
 
-    def setup(self):
+    def connection(self):
         """ Make connection to db """
-        TestHBNBCommand.db = None
+        db = None
         if os.environ.get('HBNB_TYPE_STORAGE') == 'db':
             host_name = os.environ.get('HBNB_MYSQL_HOST')
             user_name = os.environ.get('HBNB_MYSQL_USER')
             pass_user = os.environ.get('HBNB_MYSQL_PWD')
             db_name = os.environ.get('HBNB_MYSQL_DB')
-            TestHBNBCommand.db = MySQLdb.connect(host=host_name, port=3306,
-                                                 user=user_name,
-                                                 passwd=pass_user,
-                                                 db=db_name)
+            db = MySQLdb.connect(host=host_name, port=3306,
+                                 user=user_name,
+                                 passwd=pass_user,
+                                 db=db_name)
+        return db
 
-    def tear_down(self):
-        """ End connection to db"""
-        if TestHBNBCommand.db:
-            TestHBNBCommand.db.close()
-
+    @unittest.skipIf(os.environ.get('HBNB_TYPE_STORAGE') != 'db',
+                     "only for File storage")
     def test_bd_create_State(self):
         """ testing query execution"""
-        if TestHBNBCommand.db:
-            cur = self.db.cursor()
-            query = "SELECT * FROM states;"
-            res1 = cur.execute(query)
-            output = None
-            with patch('sys.stdout', new=StringIO()) as f:
-                HBNBCommand().onecmd("create State name=\"California\"")
-                output = f.getvalue().strip()
-            res2 = cur.execute(query)
-            self.assertEqual(res2, res1 + 1)
-            query = "SELECT * FROM cities;"
-            city_qty1 = cur.execute(query)
-            HBNBCommand().onecmd("create City name=\"SF\" state_id=\"{}\""
-                                 .format(output))
-            city_qty2 = cur.execute(query)
-            self.assertEqual(citi_qty2, city_qty1 + 1)
-            cur.close()
+        output = None
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create State name=\"California\"")
+            output = f.getvalue().strip()
+        db = self.connection()
+        cur = db.cursor()
+        query = "SELECT * FROM states;"
+        res = cur.execute(query)
+        results = cur.fetchall()
+        save = False
+        for result in results:
+            if result[0] == output:
+                save = True
+                break
+        self.assertTrue(save)
+        cur.close()
+        db.close()
 
     @unittest.skipIf(os.environ.get('HBNB_TYPE_STORAGE') == 'db',
                      "only for File storage")
-    def test_do_create(self):
+    def test_do_create_state(self):
         """ """
-#        if os.environ.get('HBNB_TYPE_STORAGE') == 'db':
-#            with patch('sys.stdout', new=StringIO()) as f:
-#                HBNBCommand().onecmd("create State name=\"Virginia\"")
-#                output = f.getvalue().strip()
-#                patter = '().+-().+-().+-().+-().+'
-#                self.assertTrue(re.match(pattern, output))
-#            return
-        if TestHBNBCommand.db is None:
-            with patch('sys.stdout', new=StringIO()) as f:
-                HBNBCommand().onecmd("create State name=\"California\"")
-                output = f.getvalue().strip()
-                self.assertTrue(re.match('().+-().+-().+-().+-().+', output))
-                HBNBCommand().onecmd("create City name=\"SanFrancisco\"")
-                output = f.getvalue().strip()
-                self.assertTrue(re.match('().+-().+-().+-().+-().+', output))
-                HBNBCommand().onecmd("create User email=\"hbtn@shool.com\"")
-                output = f.getvalue().strip()
-                self.assertTrue(re.match('().+-().+-().+-().+-().+', output))
-                HBNBCommand().onecmd("create Place name=\"Iglu\"")
-                output = f.getvalue().strip()
-                self.assertTrue(re.match('().+-().+-().+-().+-().+', output))
-                HBNBCommand().onecmd("create Amenity name=\"Calefaction\"")
-                output = f.getvalue().strip()
-                self.assertTrue(re.match('().+-().+-().+-().+-().+', output))
-                HBNBCommand().onecmd("create Review text=\"Amazing\"")
-                output = f.getvalue().strip()
-                self.assertTrue(re.match('().+-().+-().+-().+-().+', output))
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create State name=\"California\"")
+            output = f.getvalue().strip()
+            self.assertIsNotNone(re.match('(.+)-(.+)-(.+)-(.+)-(.+)', output))
+
+    @unittest.skipIf(os.environ.get('HBNB_TYPE_STORAGE') == 'db',
+                     "only for File storage")
+    def test_do_create_city(self):
+        """ """
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create City name=\"SanFrancisco\"")
+            output = f.getvalue().strip()
+            self.assertIsNotNone(re.match('(.+)-(.+)-(.+)-(.+)-(.+)', output))
+
+    @unittest.skipIf(os.environ.get('HBNB_TYPE_STORAGE') == 'db',
+                     "only for File storage")
+    def test_do_create_user(self):
+        """ """
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create User email=\"hbtn@shool.com\"")
+            output = f.getvalue().strip()
+            self.assertIsNotNone(re.match('(.+)-(.+)-(.+)-(.+)-(.+)', output))
+
+    @unittest.skipIf(os.environ.get('HBNB_TYPE_STORAGE') == 'db',
+                     "only for File storage")
+    def test_do_create_place(self):
+        """ """
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create Place name=\"Iglu\"")
+            output = f.getvalue().strip()
+            self.assertIsNotNone(re.match('(.+)-(.+)-(.+)-(.+)-(.+)', output))
+
+    @unittest.skipIf(os.environ.get('HBNB_TYPE_STORAGE') == 'db',
+                     "only for File storage")
+    def test_do_create_amenity(self):
+        """ """
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create Amenity name=\"Calefaction\"")
+            output = f.getvalue().strip()
+            self.assertIsNotNone(re.match('(.+)-(.+)-(.+)-(.+)-(.+)', output))
+
+    @unittest.skipIf(os.environ.get('HBNB_TYPE_STORAGE') == 'db',
+                     "only for File storage")
+    def test_do_create_review(self):
+        """ """
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create Review text=\"Amazing\"")
+            output = f.getvalue().strip()
+            self.assertIsNotNone(re.match('(.+)-(.+)-(.+)-(.+)-(.+)', output))
 
     def test_pep8(self):
         """ Test for PEP8 """

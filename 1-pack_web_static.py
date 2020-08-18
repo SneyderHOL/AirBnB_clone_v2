@@ -1,14 +1,15 @@
 from fabric.api import *
 import os
+"""fabric script"""
 #   username, and host
 env.user = os.environ.get('USER')
 env.hosts = ['localhost']
 
 
 def do_pack():
+    """function to generate a tgz archive"""
     import datetime
     date = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-    
     filename = 'versions/web_static_{}.tgz'.format(date)
     dir_path = 'web_static'
     local('mkdir -p versions')

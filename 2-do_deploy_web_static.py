@@ -29,6 +29,13 @@ def do_deploy(archive_path):
     delete_file = run('rm -f {}'.format(storage_location + tgz_file))
     if delete_file is False:
         return False
+    new_route = "{}".format(new_location + tgz_file.replace('.tgz', ''))
+    move_files = run('mv {}/web_static/* {}'.format(new_route, new_route))
+    if move_files is False:
+        return False
+    delete_folder = run('rm -rf {}/web_static'.format(new_route))
+    if delete_folder is False:
+        return False
     sym_link_name = '/data/web_static/current'
     delete_sym = run('rm -f {}'.format(sym_link_name))
     if delete_sym is False:

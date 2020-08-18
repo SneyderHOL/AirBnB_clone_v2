@@ -1,6 +1,7 @@
+#!/usr/bin/python3
+"""fabric script"""
 from fabric.api import *
 import os
-"""fabric script"""
 #   username, and host
 env.user = os.environ.get('USER')
 env.hosts = ['localhost']

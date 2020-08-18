@@ -17,12 +17,13 @@ def do_deploy(archive_path):
     upload = put('{}'.format(archive_path), storage_location)
     if upload is False:
         return False
-    create_dir = run('mkdir -p {}'.format(new_location + tgz_file))
+    create_dir = run('mkdir -p {}'.format(new_location +
+                                          tgz_file.replace('.tgz', '')))
     if create_dir is False:
         return False
     uncompress = run('tar -xzvf {} -C {}'.format(storage_location +
                                                  tgz_file, new_location +
-                                                 tgz_file))
+                                                 tgz_file.replace('.tgz', '')))
     if uncompress is False:
         return False
     delete_file = run('rm -f {}'.format(storage_location + tgz_file))

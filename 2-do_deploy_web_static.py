@@ -3,7 +3,7 @@
 from fabric.api import *
 import os
 #   username, and host
-env.user = os.environ.get('ubuntu')
+#   env.user = 'ubuntu'
 env.hosts = ['34.73.113.30', '35.185.32.152']
 
 
@@ -17,8 +17,12 @@ def do_deploy(archive_path):
     upload = put('{}'.format(archive_path), storage_location)
     if upload is False:
         return False
+    create_dir = run('mkdir -p {}'.format(new_location + tgz_file))
+    if create_dir is False:
+        return False
     uncompress = run('tar -xzvf {} -C {}'.format(storage_location +
-                                                 tgz_file, new_location))
+                                                 tgz_file, new_location +
+                                                 tgz_file))
     if uncompress is False:
         return False
     delete_file = run('rm -f {}'.format(storage_location + tgz_file))

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Module for start Flask web application"""
 import os
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
@@ -21,6 +21,7 @@ def hbnb():
 @app.route('/c/<text>')
 def c_func(text):
     """c_func function that show the message c <text>"""
+    text = text.replace('_', ' ')
     return 'C {}'.format(text)
 
 

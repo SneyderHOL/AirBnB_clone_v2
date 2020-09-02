@@ -4,6 +4,7 @@ from models.base_model import BaseModel, Base
 from models.city import City
 from sqlalchemy import Integer, String, Column, DateTime, ForeignKey
 from sqlalchemy.orm import relationship, backref
+from os import getenv
 
 
 class State(BaseModel, Base):
@@ -14,8 +15,8 @@ class State(BaseModel, Base):
     @property
     def cities(self):
         """ getter method for cities"""
-        cities_list = []
         from models import storage
+        cities_list = []
         dictionary = storage.all(City)
         if dictionary:
             for k, v in dictionary.items():

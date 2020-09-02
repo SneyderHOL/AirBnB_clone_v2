@@ -3,6 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Integer, String, Column, DateTime, ForeignKey
 from sqlalchemy.orm import relationship, backref
+from os import getenv
 
 
 class City(BaseModel, Base):
@@ -10,4 +11,5 @@ class City(BaseModel, Base):
     __tablename__ = "cities"
     name = Column(String(128), nullable=False)
     state_id = Column(String(60), ForeignKey("states.id"), nullable=False)
-    state = relationship("State", backref="cities")
+    if getenv("HBNB_TYPE_STORAGE") == "db":
+        state = relationship("State", backref="cities")

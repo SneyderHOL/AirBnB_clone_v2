@@ -51,7 +51,7 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
 
@@ -61,3 +61,7 @@ class FileStorage:
             if obj in FileStorage.__objects.values():
                 del FileStorage.__objects[obj.__class__
                                           .__name__ + "." + obj.id]
+
+    def close(self):
+        """call to reload method to deserializing the JSON"""
+        self.reload()

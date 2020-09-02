@@ -57,12 +57,10 @@ class DBStorage:
         """add the object to the current database session"""
         if obj:
             self.__session.add(obj)
-#            print(self.__session.new)
             self.__session.commit()
 
     def save(self):
         """commit all changes of the current database session"""
-#        self.__session.add()
         self.__session.commit()
 
     def delete(self, obj=None):
@@ -76,3 +74,7 @@ class DBStorage:
         session = scoped_session(sessionmaker(bind=self.__engine,
                                               expire_on_commit=False))
         self.__session = session()
+
+    def close(self):
+        """call remove method of registry"""
+        self.__session.close()

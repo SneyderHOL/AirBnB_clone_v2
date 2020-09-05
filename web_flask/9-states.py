@@ -9,13 +9,18 @@ app.url_map.strict_slashes = False
 
 
 @app.route('/states')
+def get_states_list():
+    """get the list of states objects in storage"""
+    dictionary = storage.all(State)
+    states_list = list(dictionary.values())
+    return render_template('7-states_list.html', states_list=states_list)
+
+
 @app.route('/states/<id>')
 def states_func(id=None):
     """get the list of states objects in storage"""
     dictionary = storage.all(State)
     states_list = list(dictionary.values())
-    if id is None:
-        return render_template('9-states.html', states_list=states_list)
     state = None
     for state_element in states_list:
         if id == state_element.id:
